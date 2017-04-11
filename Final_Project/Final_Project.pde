@@ -5,6 +5,5 @@ void setup () {
 }
 
 void draw() {
-  rectMode(CENTER);
-  rect(width/2, height/2, width/2, height/2);
+  background(255);
 }
