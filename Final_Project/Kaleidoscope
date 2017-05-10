@@ -1,0 +1,123 @@
+//Alden Shiverick
+Triangles[] myTri = new Triangles[8];
+Circles[] myCir = new Circles[12];
+Squares[] mySqr = new Squares[16];
+Ellipses[] myEll = new Ellipses[8];
+int xSpeedCir=2;
+int xCir=130;
+int xSpeedSqr=3;
+int xSqr=75;
+float tRotate=0;
+float eRotate=0;
+int xTri=250;
+int xEll=220;
+boolean move=false;
+boolean directions=true;
+
+void setup () {
+  size(500, 500);
+  //colorMode(HSB);
+  translate(width/2, height/2);
+  for (int i=0; i<myTri.length; i++) {
+    myTri[i] = new Triangles();
+    myTri[i].drawSmallTri(300, 250);
+    myTri[i].drawBigTri(500, 250);
+  }
+  for (int j=0; j<myCir.length; j++) {
+    myCir[j] = new Circles();
+    myCir[j].drawSmallCir(275, 25, 10);
+    myCir[j].drawBigCir(380, 250, 75);
+  }
+  for (int k=0; k<mySqr.length; k++) {
+    mySqr[k] = new Squares();
+    mySqr[k].drawSmallSqr(450, 250, 25);
+    mySqr[k].drawBigSqr(325, 250, 75);
+  }
+  for (int l=0; l<myEll.length; l++) {
+    myEll[l] = new Ellipses();
+    myEll[l].drawSmallEll(260, 250, 20, 5);
+    myEll[l].drawBigEll(440, 250, 50, 150);
+  }
+}
+
+void draw() {
+  
+  background(255,255,0);
+  translate(width/2, height/2);
+ 
+  //Circles moving
+  for (int j=0; j<myCir.length; j++) {
+      myCir[j].drawBigCir(xCir, 0, 75);
+      myCir[j].drawSmallCir(xCir-105,0,10);
+      rotate(PI/6);
+  }
+  if (xCir>=215) {
+    xSpeedCir = -xSpeedCir;
+    xCir = 215;
+  } else if (xCir<-215) {
+    xSpeedCir = -xSpeedCir;
+    xCir = -215;
+  }
+  if (move) {
+    xCir += xSpeedCir;
+  }
+  
+  //Squares moving
+  for (int k=0; k<mySqr.length; k++) {
+      mySqr[k].drawBigSqr(xSqr, 0, 75);
+      mySqr[k].drawSmallSqr(xSqr+125, 0, 25);
+      rotate(PI/8);
+  }
+  if (xSqr>=215) {
+    xSpeedSqr = -xSpeedSqr;
+    xSqr = 215;
+  } else if (xSqr<-215) {
+    xSpeedSqr = -xSpeedSqr;
+    xSqr = -215;
+  }
+  if (move) {
+    xSqr += xSpeedSqr;
+  }
+  
+  //Triangles moving
+  rotate(tRotate);
+  for (int i=0; i<myTri.length; i++) {
+      myTri[i].drawBigTri(xTri, 0);
+      myTri[i].drawSmallTri(xTri-190,0);
+      rotate(PI/4);
+  }
+  if (move) {
+    tRotate = tRotate + .02;
+  }
+  
+  //Ellipses moving
+  rotate(eRotate);
+  for (int l=0; l<myEll.length; l++) {
+      myEll[l].drawBigEll(xEll, 0, 50, 150);
+      myEll[l].drawSmallEll(xEll-210, 0, 20, 5);
+      rotate(PI/4);
+  }
+  if (move) {
+    eRotate = eRotate - .05;
+  }
+  
+  pushMatrix();
+  if(move==false) {
+    translate(0,0);
+    fill(0);
+    textSize(20);
+    text("Click to start and stop", -240, -220);
+    tRotate=0;
+    eRotate=0;
+  }
+  popMatrix();
+  
+}
+
+void mousePressed() {
+  if (move == true) {
+    move = false;
+  } else {
+    move = true;
+  }
+}
