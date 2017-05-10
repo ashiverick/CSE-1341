@@ -1,0 +1,24 @@
+class Ellipses {
+  float x=0;
+  float y=0;
+  float r1=0;
+  float r2=0;
+  color ellipseColor1 = color(255,0,255,150);
+  color ellipseColor2 = color(255,0,255,150);
+  
+  Ellipses() {
+    ellipse(x,y,r1,r2);
+  }
+  
+  void drawBigEll(float x, float y, float r1, float r2) {
+    fill(ellipseColor1);
+    //noStroke();
+    ellipse(x,y,r1,r2);
+  }
+  
+  void drawSmallEll(float x, float y, float r1, float r2) {
+    fill(ellipseColor2);
+    //noStroke();
+    ellipse(x,y,r1,r2);
+  }
+}
